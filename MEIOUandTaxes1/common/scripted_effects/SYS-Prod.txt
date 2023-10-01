@@ -607,13 +607,15 @@ Prod_DoCheck = {
 			}
 			OR = {
 				NOT = { is_key_equal = { lhs = Prod_S$slot$ value = 24 } }
-				has_province_flag = Industry_25Present
 				NOT = { check_key = { lhs = RE_Total value = 2 } }
 			}
 			OR = {
 				NOT = { is_key_equal = { lhs = Prod_S$slot$ value = 25 } }
-				has_province_flag = Industry_24Present
 				NOT = { check_key = { lhs = RE_Total value = 2 } }
+			}
+			OR = {
+				NOT = { is_key_equal = { lhs = Prod_S$slot$ value = 32 } }
+				NOT = { check_key = { lhs = Building_Commercial value = 0.5 } }
 			}
         }
         Public_PopSlot = { slot = $slot$ }
@@ -752,17 +754,27 @@ Prod_SetSply = {
 						continent = north_america
 						continent = south_america
 					}
+					NOT = { Banking = 100 }
 				}
-				multiply_key = { lhs = Prod_S$slot$Sply9 value = 0.1 }
-				multiply_key = { lhs = Prod_S$slot$Sply25 value = 5 }
+				multiply_key = { lhs = Prod_S$slot$Sply9 value = 0.25 }
+				multiply_key = { lhs = Prod_S$slot$Sply25 value = 4 }
 			}
 			else_if = {
 				limit = {
 					continent = africa
+					NOT = { Banking = 100 }
 				}
 				multiply_key = { lhs = Prod_S$slot$Sply9 value = 0.25 }
-				multiply_key = { lhs = Prod_S$slot$Sply25 value = 5 }
+				multiply_key = { lhs = Prod_S$slot$Sply25 value = 4 }
 			}
+		}
+		else_if = {
+			limit = {
+				is_key_equal = { lhs = Prod_S$slot$ value = 19 }
+			}
+			multiply_key = { lhs = Prod_S$slot$Sply1 which = Modi_FarmOutput } ### only delicacies
+			multiply_key = { lhs = Prod_S$slot$Sply9 which = Modi_FarmOutput } ### only delicacies
+			multiply_key = { lhs = Prod_S$slot$Sply10 which = Modi_FarmOutput } ### only delicacies
 		}
 		else_if = {
 			limit = {
@@ -800,6 +812,8 @@ Prod_SetSply = {
                 is_key_equal = { lhs = Prod_S$slot$ value = 42 }
             }
 			multiply_key = { lhs = Prod_S$slot$Sply4 which = Modi_FarmOutput }
+			multiply_key = { lhs = Prod_S$slot$Sply9 which = Modi_FarmOutput }
+			multiply_key = { lhs = Prod_S$slot$Sply25 which = Modi_FarmOutput }
         }
         if = {
             limit = {

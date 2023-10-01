@@ -99,10 +99,9 @@ on_startup = {
 				country_event = { id = setup_event.11 }
 				
 				country_event = { id = cb_types.1 }
-				country_event = { id = cb_types.2 }
-				country_event = { id = cb_types.3 }
-				country_event = { id = cb_types.4 }
-								
+				
+				country_event = { id = SYS_Pulse.005 }
+				
 				# Reload DG data
 				country_event = { id = POP_DG.001 }
 				
@@ -307,8 +306,6 @@ on_startup = {
 		every_province = {
             remove_province_modifier = river_notify
             set_key = { lhs = ID_TN value = 0 }
-			set_key = { lhs = Land_SoilD which = Land_Soil }
-			multiply_key = { lhs = Land_SoilD value = 100 }
 			set_key = { lhs = BU_SpendMPMaintSave which = BU_SpendMPMaint }
 		}
         tradenode_centers = { # Assign unique trade node center ID's
@@ -2438,14 +2435,6 @@ on_four_year_pulse = {
 	#	#country_event = { id = Prov_UI.023 } # Burghers Revoke (privileges)
 	#	
 	#}
-	events = {
-		DG_Protestant.007	#1st Diet of Speyer; fire_only_once and checks for a unique Global Flag that's set in fire_only_once event
-		DG_Protestant.009	#2nd Diet of Speyer; fire_only_once and checks for a unique Global Flag that's set in fire_only_once event
-		dg_humanism.001     #Birth of Renaissance
-		dg_humanism.002     #The $PRIMARY_CULTURE$ Renaissance
-		dg_humanism.011     #Veiled criticism of the church
-		dg_humanism.014     #The $PRIMARY_CULTURE$ Bible
-	}
 	random_events = {
 		1000 = 0
 		25 = colonial_nation.4
@@ -2453,7 +2442,6 @@ on_four_year_pulse = {
 		25 = colonial_nation.12
 		25 = colonial_nation.14
 		25 = colonial_nation.77
-		
 	}
 }
 
@@ -2505,8 +2493,14 @@ on_four_year_pulse_3 = {
 	#	
 	#}
 	events = {
+		DG_Protestant.007	#1st Diet of Speyer; fire_only_once and checks for a unique Global Flag that's set in fire_only_once event
+		DG_Protestant.009	#2nd Diet of Speyer; fire_only_once and checks for a unique Global Flag that's set in fire_only_once event
+		dg_humanism.001     #Birth of Renaissance
+		dg_humanism.002     #The $PRIMARY_CULTURE$ Renaissance
+		dg_humanism.011     #Veiled criticism of the church
+		dg_humanism.014     #The $PRIMARY_CULTURE$ Bible
+		dg_humanism.026     #The Christian ethics
 	}
-
 }
 
 on_four_year_pulse_4 = {
@@ -2669,6 +2663,19 @@ on_five_year_pulse_3 = {
 			}
 		}
 		country_event = { id = DG_Catholics.009 }
+	}
+	events = {
+	    DG_Catholics.010    #Founding of the Jesuits
+		DG_Catholics.413    #The Jesuits
+		DG_Catholics.415    #Jesuit Education
+	}
+	random_events = {
+		100 = DG_Catholics.402    #Augustinian Monks
+		100 = DG_Catholics.403    #Dominican Friars
+		100 = DG_Catholics.404    #Cisterscian Monks
+		100 = DG_Catholics.405    #Franscican Friars
+		100 = DG_Catholics.406    #Jesuit Monks
+		1000 = 0
 	}
 }
 
@@ -3302,11 +3309,23 @@ on_company_chartered = {
 
 # ROOT = Overlord, FROM = Minor
 on_dependency_gained = {
-	set_country_flag = tf_recalculate_communication_efficiency
-	overlord = { set_country_flag = tf_recalculate_communication_efficiency }
+	if = {
+		limit = {
+			FROM = { is_subject_other_than_tributary_trigger = yes }
+		}
+		set_country_flag = tf_recalculate_communication_efficiency
+		overlord = { set_country_flag = tf_recalculate_communication_efficiency }
+		FROM = { 
+			set_country_flag = tf_recalculate_communication_efficiency 
+			every_subject_country = {
+				limit = {
+					is_subject_other_than_tributary_trigger = yes
+				}
+				set_country_flag = tf_recalculate_communication_efficiency
+			}
+		}
+	}
 	FROM = { 
-		set_country_flag = tf_recalculate_communication_efficiency 
-		every_subject_country = { set_country_flag = tf_recalculate_communication_efficiency }
 		if = {
 			limit = {
 				OR = {
@@ -3370,7 +3389,12 @@ on_dependency_lost = {
 	overlord = { set_country_flag = tf_recalculate_communication_efficiency }
 	FROM = { 
 		set_country_flag = tf_recalculate_communication_efficiency 
-		every_subject_country = { set_country_flag = tf_recalculate_communication_efficiency }
+		every_subject_country = {
+			limit = {
+				is_subject_other_than_tributary_trigger = yes
+			}
+			set_country_flag = tf_recalculate_communication_efficiency
+		}
 		set_key = { lhs = Integration_Progress value = 0 }
 		set_key = { lhs = Remaining_Years value = 0 }
 		vassal_type_tracking_effect = yes 

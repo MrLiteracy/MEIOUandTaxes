@@ -1,9 +1,0 @@
-university_trigger = {
-	any_owned_province = {
-		OR = {
-			has_province_modifier = LN_Minor
-			has_province_modifier = LN_Important
-			has_province_modifier = LN_Major
-		}
-	}
-}

@@ -2294,6 +2294,52 @@ on_yearly_pulse = {
 	}
 }
 on_yearly_pulse_2 = {
+    every_owned_province = {
+	    random = {
+		    chance = 0.5
+			province_event = { id = DG_Papacy.906 days = 1 } #Absentee Bishop
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Papacy.907 days = 1 } #Bishop's Mistress
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Papacy.908 days = 1 } #Indulgence Peddler
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.402 days = 1 } #Augustinian Monks
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.403 days = 1 } #Dominican Friars
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.404 days = 1 } #Cistercian Monks
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.404 days = 1 } #Cistercian Monks
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.405 days = 1 } #Franciscan Friars
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.406 days = 1 } #Jesuit Monks
+		}
+		random = {
+		    chance = 0.2
+			province_event = { id = DG_Catholics.503 days = 1 } #Canonization of a Saint
+		}
+		random = {
+		    chance = 0.5
+			province_event = { id = DG_Catholics.504 days = 1 } #The First Estate
+		}
+	}
 }
 on_yearly_pulse_3 = {
 }
@@ -2352,9 +2398,6 @@ on_bi_yearly_pulse = {
 		100 = DG_Papacy.903 #Selling of Indulgences
 		100 = DG_Papacy.904 #Veneration of Relics
 		100 = DG_Papacy.905 #Veneration of Virgin Mary
-		100 = DG_Papacy.906 #Absentee Bishop
-		100 = DG_Papacy.907 #Bishop's Mistress
-		100 = DG_Papacy.906 #Indulgence Peddler
 
 		5000 = 0
 	}
@@ -2398,10 +2441,51 @@ on_bi_yearly_pulse_3 = {
 }
 
 on_bi_yearly_pulse_4 = {
-	events = {
+    random_events = {
+		100 = 5008 # Gift to the state
+		100 = 5014 # Insanity of the monarch
+		100 = 5027 # Reformation of army
+		100 = 5032 # Reformation of navy
+		100 = 5051 # Unhappines among artisans
+		100 = 5052 # Unhappines among peasants
+		100 = 5053 # Unhappines among merchants
+		100 = 5063 # Noble families feud
+		100 = 5064 # Nobles ally with foreign power
+		100 = 5065 # Assassination of the noble
+		100 = 5068 # Sale of offices
+		100 = 5071 # Nobles demand increased pensions
+		100 = 5075 # Nobles demand old rights
+		100 = 5076 # Cities demand old rights
+		75 = 5083  # Italian engineer available
+		100 = 5088 # Merchants harassed
+		100 = 5089 # Petition for redress
+		100 = 5090 # Noble family requests aid
+		100 = 5095 # Statesman gains power
+		100 = 6012 # Court painter
+		100 = 6013 # Grand ball
+		100 = 715  # Monarch embarasses the court
+		100 = 722  # Sickness of monarch
+		100 = 736  # Death of a merchant
+		100 = 737  # Local fortification expert
+		100 = 738  # Naive relative
+		100 = 740  # Smugglers running rampart
+		100 = 838  # An example to us all
+		100 = 854  # Golden era for culture
+		100 = 865  # Influential preacher
+		100 = 872  # Travelling minstrel
+		100 = 874  # Tensions between nobles and clergy
+		100 = 878  # Disagreeing advisor
+		100 = 883  # Patronage for renaissance arts
+		100 = random_event.3   # Traitor in parliament 
+		100 = random_event.8   # Heresy
+		100 = random_event.12  # The white elephant
+		100 = random_event.15  # Musket or bow
+		2000 = 0
 	}
 }
+
 on_bi_yearly_pulse_5 = {
+
 }
 
 on_thri_yearly_pulse = {
@@ -2414,6 +2498,20 @@ on_thri_yearly_pulse = {
 
 on_thri_yearly_pulse_2 = {
 	events = {
+	    DG_Catholics.010    #Founding of the Jesuits
+		DG_Catholics.413    #The Jesuits
+		DG_Catholics.415    #Jesuit Education
+	}
+	random_events = {
+		100 = DG_Catholics.407    #Agricultural Innovation
+		100 = DG_Catholics.408    #Monastic Protests
+		100 = DG_Catholics.409    #Book Burning
+		100 = DG_Catholics.410    #Monastic Dispute
+		100 = DG_Catholics.411    #Monks preach against heresy
+		100 = DG_Catholics.501    #Candidate for Sainthood
+		100 = DG_Papacy.909       #Ecclesiastical Jurisdiction
+		100 = DG_Papacy.910       #Popular Piety
+		1500 = 0
 	}
 }
 
@@ -2424,7 +2522,19 @@ on_thri_yearly_pulse_3 = {
 }
 
 on_thri_yearly_pulse_4 = {
-	events = {
+	random_events = {
+		100 = nobles_estate_events.1
+		100 = nobles_estate_events.2
+		100 = nobles_estate_events.3
+		100 = nobles_estate_events.4
+		100 = nobles_estate_events.5
+		100 = nobles_estate_events.6
+		100 = nobles_estate_events.7
+		100 = nobles_estate_events.8
+		100 = nobles_estate_events.9
+		100 = nobles_estate_events.10
+		100 = nobles_estate_events.11
+		1500 = 0
 	}
 }
 
@@ -2517,47 +2627,6 @@ on_four_year_pulse_4 = {
 			country_event = { id = DG_Hussites.100 days = 110 } 
 		}
 	}
-	random_events = {
-		100 = 5008 # Gift to the state
-		100 = 5014 # Insanity of the monarch
-		100 = 5027 # Reformation of army
-		100 = 5032 # Reformation of navy
-		100 = 5051 # Unhappines among artisans
-		100 = 5052 # Unhappines among peasants
-		100 = 5053 # Unhappines among merchants
-		100 = 5063 # Noble families feud
-		100 = 5064 # Nobles ally with foreign power
-		100 = 5065 # Assassination of the noble
-		100 = 5068 # Sale of offices
-		100 = 5071 # Nobles demand increased pensions
-		100 = 5075 # Nobles demand old rights
-		100 = 5076 # Cities demand old rights
-		100 = 5083 # Italian engineer available
-		100 = 5088 # Merchants harassed
-		100 = 5089 # Petition for redress
-		100 = 5090 # Noble family requests aid
-		100 = 5095 # Statesman gains power
-		100 = 6012 # Court painter
-		100 = 6013 # Grand ball
-		100 = 715  # Monarch embarasses the court
-		100 = 722  # Sickness of monarch
-		100 = 736  # Death of a merchant
-		100 = 737  # Local fortification expert
-		100 = 738  # Naive relative
-		100 = 740  # Smugglers running rampart
-		100 = 838  # An example to us all
-		100 = 854  # Golden era for culture
-		100 = 865  # Influential preacher
-		100 = 872  # Travelling minstrel
-		100 = 874  # Tensions between nobles and clergy
-		100 = 878  # Disagreeing advisor
-		100 = 883  # Patronage for renaissance arts
-		100 = random_event.3   # Traitor in parliament 
-		100 = random_event.8   # Heresy
-		100 = random_event.12  # The white elephant
-		100 = random_event.15  # Musket or bow
-		6200 = 0
-	}
 }
 
 on_five_year_pulse = {
@@ -2610,20 +2679,6 @@ on_five_year_pulse_2 = {
 		5000 = flavor_hab.5190
 		250 = colonial_nation.75
 	}
-	random_events = {
-		100 = nobles_estate_events.1
-		100 = nobles_estate_events.2
-		100 = nobles_estate_events.3
-		100 = nobles_estate_events.4
-		100 = nobles_estate_events.5
-		100 = nobles_estate_events.6
-		100 = nobles_estate_events.7
-		100 = nobles_estate_events.8
-		100 = nobles_estate_events.9
-		100 = nobles_estate_events.10
-		100 = nobles_estate_events.11
-		2000 = 0
-	}
 }
 
 on_five_year_pulse_3 = {
@@ -2666,24 +2721,6 @@ on_five_year_pulse_3 = {
 			}
 		}
 		country_event = { id = DG_Catholics.009 }
-	}
-	events = {
-	    DG_Catholics.010    #Founding of the Jesuits
-		DG_Catholics.413    #The Jesuits
-		DG_Catholics.415    #Jesuit Education
-	}
-	random_events = {
-		100 = DG_Catholics.402    #Augustinian Monks
-		100 = DG_Catholics.403    #Dominican Friars
-		100 = DG_Catholics.404    #Cisterscian Monks
-		100 = DG_Catholics.405    #Franscican Friars
-		100 = DG_Catholics.406    #Jesuit Monks
-		100 = DG_Catholics.407    #Agricultural Innovation
-		100 = DG_Catholics.408    #Monastic Protests
-		100 = DG_Catholics.409    #Book Burning
-		100 = DG_Catholics.410    #Monastic Dispute
-		100 = DG_Catholics.411    #Monks preach against heresy
-		1000 = 0
 	}
 }
 

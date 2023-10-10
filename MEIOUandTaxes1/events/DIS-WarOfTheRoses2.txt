@@ -17,10 +17,6 @@ country_event = {
 		kill_heir = {}
 		set_country_flag = war_of_the_roses
 		set_global_flag = war_of_the_roses
-		province_event = {
-			id = war_of_the_roses.2
-			days = 2
-		}
 
 		#245 York
 		245 = {
@@ -31,79 +27,139 @@ country_event = {
 		244 = {
 			add_core = LNC
 		}
-
-		release = LNC
-		release = YOR
 	}
 
 	option = { #Support the House of Lancaster
 		name = war_of_the_roses.1.a
 		log = "FE-war_of_the_roses:[GetYear]:[Root.GetName]:supported the House of Lancaster:war_of_the_roses.1"
 		set_country_flag = supports_house_of_lancaster
+
+		if = { #Release York 
+			limit = {
+				NOT = { exists = YOR }
+			}
+			release = YOR
+		}
+
+		create_subject = {
+			subject_type = daimyo_vassal
+			subject = YOR
+		}
+		YOR = { 
+			hidden_effect = {
+				Pol_AdaptFromScope = yes
+				add_government_reform = Pol_Privileges1
+				if = {
+					limit = {
+						NOT = { has_country_flag = POP_Init }
+					}
+					country_event = { id = Init.1 }
+				}
+			}
+		}
 	}
 	option = {
 		name = war_of_the_roses.1.b
 		log = "FE-war_of_the_roses:[GetYear]:[Root.GetName]:supported the House of York:war_of_the_roses.1"
 		set_country_flag = supports_house_of_york
+
+		if = { #Release York 
+			limit = {
+				NOT = { exists = LNC }
+			}
+			release = LNC
+		}
+
+		create_subject = {
+			subject_type = daimyo_vassal
+			subject = LNC
+		}
+		LNC = { 
+			hidden_effect = {
+				Pol_AdaptFromScope = yes
+				add_government_reform = Pol_Privileges1
+				if = {
+					limit = {
+						NOT = { has_country_flag = POP_Init }
+					}
+					country_event = { id = Init.1 }
+				}
+			}
+		}
+	}
+
+	after = {
+		#Ask for support
+		province_event = {
+			id = war_of_the_roses.2
+			days = 2
+		}
 	}
 }
 
-### SUPPORT FOR LANCASTER/YORK ###
-
-country_event = {
-	id = war_of_the_roses.2 #Local support for chosen side
+province_event = {
+	id = war_of_the_roses.2
 	title = war_of_the_roses.2.t
 	desc = war_of_the_roses.2.d
 	picture = WAR_OF_THE_ROSES_eventPicture
+	is_triggered_only = yes
+
 	trigger = {
-		any_owned_province = {
-			OR = {
-				region = south_england_region
-				region = north_england_region
+		FROM = {
+			tag = ENG
+		}
+		has_country_flag = checked_support
+	}
+
+	option = {
+		name = war_of_the_roses.2.a
+		Public_ChangePowerbrokerLoyaltyTooltip = { Powerbroker = NO Amount = 10 }
+		Public_ChangeClassWealthVal = { class= NO type = value inp=10 }
+	}
+
+	option = {
+		name = war_of_the_roses.2.b
+		Public_ChangePowerbrokerLoyaltyTooltip = { Powerbroker = NO Amount = 20 }
+		Public_ChangeClassWealthVal = { class= NO type = value inp=25 } 
+	}
+
+	option = {
+		name = war_of_the_roses.2.c
+		Public_ChangePowerbrokerLoyaltyTooltip = { Powerbroker = NO Amount = -80 }
+	}
+
+	after = {
+		random_owned_area = {
+			limit = {
+				NOT = {
+					has_province_flag = checked_support
+				}
 			}
-			NOT = { has_province_modifier = wotr_local_support }
-			NOT = { has_province_modifier = wotr_local_support_for_lancaster }
-			NOT = { has_province_modifier = wotr_local_support_for_york }
-			NOT = { has_province_modifier = disgruntled_nobles }
+			province_event = {
+				id = war_of_the_roses.2
+				days = 2
+			}
 		}
 	}
+}
+
+#Fire the civil war
+country_event = {
+	id = war_of_the_roses.3
+	title = war_of_the_roses.3.t
+	desc = war_of_the_roses.3.d
+	picture = WAR_OF_THE_ROSES_eventPicture
+
 	is_triggered_only = yes
 
 	option = {
 		name = war_of_the_roses.2.a
-		random_owned_province = {
-			limit = {
-				OR = {
-					region = south_england_region
-					region = north_england_region
-				}
-				NOT = { has_province_modifier = wotr_local_support }
-				NOT = { has_province_modifier = wotr_local_support_for_lancaster }
-				NOT = { has_province_modifier = wotr_local_support_for_york }
-				NOT = { has_province_modifier = disgruntled_nobles }
-			}
-			add_province_modifier = {
-				name = wotr_local_support
-				duration = 3650
-			}
-			set_province_flag = disgruntled_nobles_timer
-			Public_ChangePowerbrokerLoyaltyTooltip = { Powerbroker=NO Amount=20 }
-			every_neighbor_province = {
-				limit = {
-					owned_by = ROOT
-					NOT = { has_province_modifier = wotr_local_support }
-					NOT = { has_province_modifier = wotr_local_support_for_lancaster }
-					NOT = { has_province_modifier = wotr_local_support_for_york }
-					NOT = { has_province_modifier = disgruntled_nobles }
-				}
-				add_province_modifier = {
-					name = wotr_local_support
-					duration = 3650
-				}
-				set_province_flag = disgruntled_nobles_timer
-				Public_ChangePowerbrokerLoyaltyTooltip = { Powerbroker=NO Amount=20 }
-			}
+		setup_civil_war2 = {
+			elite = NO
+			rebel_tag = MAZ
+			orig_scope = ROOT
 		}
+
 	}
 }
 
